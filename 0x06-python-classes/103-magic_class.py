@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-import math
 
 """Magic class to define a circle object"""
 
