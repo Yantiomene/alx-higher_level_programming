@@ -1,12 +1,11 @@
 #!/usr/bin/python3
-
+import math
 """Magic class to define a circle object"""
 
 
 class MagicClass:
     """ Magic class that create a circle and evalute
     it area and circumference"""
-    import math
 
     def __init__(self, radius=0):
         """initialize the radius"""
