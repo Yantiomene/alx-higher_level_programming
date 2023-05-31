@@ -6,6 +6,8 @@
 class MagicClass:
     """ Magic class that create a circle and evalute
     it area and circumference"""
+    import math
+
     def __init__(self, radius=0):
         """initialize the radius"""
         self.__radius = 0
