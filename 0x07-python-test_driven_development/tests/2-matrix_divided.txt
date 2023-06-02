@@ -1,0 +1,78 @@
+=============================
+The `2-matrix_divided` module
+=============================
+
+The `matrix_divided(matrix, div)` function divide all element
+of a matrix by div
+
+Using `matrix_divided`
+--------------------------------
+
+Importing the function from module:
+	  >>> matrix_divided = __import__("2-matrix_divided").matrix_divided
+
+1.Calling with a 2 by 3 matrix and div = 3:
+	>>> matrix_divided([[1, 2, 3], [4, 5, 6]], 3)
+	[[0.33, 0.67, 1.0], [1.33, 1.67, 2.0]]
+
+2.Calling with a 2 by 3 matrix and div = 0:
+	>>> matrix_divided([[1, 2, 3], [4, 5, 6]], 0)
+	Traceback (most recent call last):
+		  ...
+	ZeroDivisionError: division by zero
+
+3.Calling with a 2 by 3 matrix and character (div = '2'):
+	>>> matrix_divided([[1, 2, 3], [4, 5, 6]], '2')
+	Traceback (most recent call last):
+		  ...
+	TypeError: div must be a number
+
+4.Calling with a 2 by 3 matrix and a list (div = [2]):
+	  >>> matrix_divided([[1, 2, 3], [4, 5, 6]], [2])
+	  Traceback (most recent call last):
+	  	    ...
+	  TypeError: div must be a number
+
+5.Calling with a 2 by 3 matrix and div = 2.5:
+	  >>> matrix_divided([[1, 2, 3], [4, 5, 6]], 2.5)
+	  [[0.4, 0.8, 1.2], [1.6, 2.0, 2.4]]
+
+6.Calling with a matrix with differents row sizes adn div=2:
+	  >>> matrix_divided([[1, 2, 3], [4, 5]], 2)
+	  Traceback (most recent call last):
+	  	    ...
+	  TypeError: Each row of the matrix must have the same size
+
+7.Calling with an empty matrix and div = 2:
+	  >>> matrix_divided([[]], 2)
+	  [[]]
+
+8.Calling with a list intead of a matrix:
+	  >>> matrix_divided([1, 2, 3], 2)
+	  Traceback (most recent call last):
+	  	    ...
+	  TypeError: matrix must be a matrix (list of lists) of integers/floats
+
+9.Calling with a matrix with mixed object:
+	  >>> matrix_divided([['1', (2, 3), 5], ['a', [4], "abc"]], 2)
+	  Traceback (most recent call last):
+	  	    ...
+	  TypeError: matrix must be a matrix (list of lists) of integers/floats
+
+10.Calling with a tuple of tuple:
+	   >>> matrix_divided(((1, 2, 3), (4, 5, 6)), 2)
+	   Traceback (most recent call last):
+	   	     ...
+	   TypeError: matrix must be a matrix (list of lists) of integers/floats
+
+11.Calling with a string:
+	   >>> matrix_divided("ALX Holberton", 2)
+	   Traceback (most recent call last):
+	   	     ...
+	   TypeError: matrix must be a matrix (list of lists) of integers/floats
+
+12.Calling with None:
+	   >>> matrix_divided(None, 2)
+	   Traceback (most recent call last):
+	   	     ...
+	   TypeError: matrix must be a matrix (list of lists) of integers/floats
