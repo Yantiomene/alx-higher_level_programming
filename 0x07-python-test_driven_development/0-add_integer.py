@@ -1,6 +1,9 @@
 #!/usr/bin/python3
 
-"""Defines a function to add 2 numbers"""
+"""
+Defines a function to add 2 numbers
+The function check if a and b are numbers
+"""
 
 
 def add_integer(a, b=98):
