@@ -65,3 +65,15 @@ Case float NaN:
      Traceback (most recent call last):
      	       ...
      ValueError: cannot convert float NaN to integer
+
+Case missing 1 value:
+     >>> add_integer(b=2)
+     Traceback (most recent call last):
+     	       ...
+     TypeError: add_integer() missing 1 required positional argument: 'a'
+
+Case missing 2 arguments:
+     >>> add_integer()
+     Traceback (most recent call last):
+     	       ...
+     TypeError: add_integer() missing 1 required positional argument: 'a'
