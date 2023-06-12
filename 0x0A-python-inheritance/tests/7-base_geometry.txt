@@ -73,3 +73,17 @@ Using the `BaseGeometry` class
     Traceback (most recent call last):
    	      ...
     TypeError: string must be an integer
+
+12. retrive the area:
+    >>> bg = BaseGeometry()
+    >>> bg.area()
+    Traceback (most recent call last):
+    	      ...
+    Exception: area() is not implemented
+
+13. Case of 3 arguments:
+    >>> bg = BaseGeometry()
+    >>> bg.integer_validator("name", 1, 2)
+    Traceback (most recent call last):
+    	      ...
+    TypeError: integer_validator() takes 3 positional arguments but 4 were given
