@@ -1,4 +1,4 @@
-#!/usr/bin/pyhton3
+#!/usr/bin/python3
 """Defines a function to returns a list of lists
    of integers representing the Pascal's trinagle of n
 """
