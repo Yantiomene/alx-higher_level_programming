@@ -37,12 +37,10 @@ class Stats:
                 print("{}: {:d}".format(key, self.dic[key]))
 
 
-
 if __name__ == "__main__":
     stat = Stats()
     stat.init_info()
-    count  = 0
-
+    count = 0
 
     try:
         for line in sys.stdin:
@@ -52,11 +50,11 @@ if __name__ == "__main__":
             try:
                 word_line = [x for x in line.split(" ")]
                 stat.inc_status(word_line[-2])
-                stat.size += int(word_line[-1])
-            except Exception as e:
-                print("[{}]: {}".format(e.__class__.__name__, e))
+                stat.size += int(word_line[-1].strip("\n"))
+            except Exception:
+                pass
 
-            count +=1
+            count += 1
     except KeyboardInterrupt:
         stat.print_info()
         raise
