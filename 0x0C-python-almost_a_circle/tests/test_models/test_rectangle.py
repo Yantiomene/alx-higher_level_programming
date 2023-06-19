@@ -54,6 +54,16 @@ class TestRectangleMethdods(unittest.TestCase):
         with self.assertRaises(TypeError):
             rtg = Rectangle()
 
+    def test_check_value(self):
+        """ Test args passed """
+        with self.assertRaises(ValueError):
+            r = Rectangle(-1, 2)
+
+    def test_check_value_2(self):
+        """ Test args passed """
+        with self.assertRaises(ValueError):
+            r = Rectangle(1, -2)
+
     def test_access_width(self):
         """Trying to access width"""
         rtg = Rectangle(1, 1)
@@ -286,3 +296,20 @@ class TestRectangleMethdods(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as std_out:
             print(type(r1_dictionary))
             self.assertEqual(std_out.getvalue(), res)
+
+    def test_load_from_file(self):
+        """ Test load JSON file """
+        load_file = Rectangle.load_from_file()
+        self.assertEqual(load_file, [])
+
+    def test_load_from_file_2(self):
+        """ Test load JSON file """
+        r1 = Rectangle(5, 5)
+        r2 = Rectangle(8, 2, 5, 5)
+
+        linput = [r1, r2]
+        Rectangle.save_to_file(linput)
+        loutput = Rectangle.load_from_file()
+
+        for i in range(len(linput)):
+            self.assertEqual(linput[i].__str__(), loutput[i].__str__())

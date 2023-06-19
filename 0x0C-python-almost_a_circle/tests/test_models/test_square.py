@@ -62,6 +62,11 @@ class TestSquareMethods(unittest.TestCase):
         with self.assertRaises(TypeError):
             s = Square(1, 1, 1, 1, 1)
 
+    def test_value_square(self):
+        """ Test value pased to Square """
+        with self.assertRaises(ValueError):
+            s = Square(-1)
+
     def test_access_width(self):
         """Test accessing width"""
         s = Square(1)
@@ -339,3 +344,50 @@ class TestSquareMethods(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as std_out:
             print(type(s1_dictionary))
             self.assertEqual(std_out.getvalue(), res)
+
+    def test_create(self):
+        """ Test create method """
+        dictionary = {'id': 98}
+        s = Square.create(**dictionary)
+        self.assertEqual(s.id, 98)
+
+    def test_create_2(self):
+        """ Test create method """
+        dictionary = {'id': 98, 'size': 1}
+        s = Rectangle.create(**dictionary)
+        self.assertEqual(s.id, 98)
+        self.assertEqual(s.size, 1)
+
+    def test_create_3(self):
+        """ Test create method """
+        dictionary = {'id': 98, 'size': 1, 'x': 2}
+        s = Rectangle.create(**dictionary)
+        self.assertEqual(s.id, 98)
+        self.assertEqual(s.size, 1)
+        self.assertEqual(s.x, 2)
+
+    def test_create_4(self):
+        """ Test create method """
+        dictionary = {'id': 98, 'size': 1, 'x': 2, 'y': 3}
+        s = Rectangle.create(**dictionary)
+        self.assertEqual(s.id, 98)
+        self.assertEqual(s.size, 1)
+        self.assertEqual(s.x, 2)
+        self.assertEqual(s.y, 3)
+
+    def test_load_from_file(self):
+        """ Test load JSON file """
+        load_file = Square.load_from_file()
+        self.assertEqual(load_file, [])
+
+    def test_load_from_file_2(self):
+        """ Test load JSON file """
+        s1 = Square(5)
+        s2 = Square(8, 2, 5)
+
+        linput = [s1, s2]
+        Square.save_to_file(linput)
+        loutput = Square.load_from_file()
+
+        for i in range(len(linput)):
+            self.assertEqual(linput[i].__str__(), loutput[i].__str__())
