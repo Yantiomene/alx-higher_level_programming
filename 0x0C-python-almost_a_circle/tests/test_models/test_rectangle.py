@@ -3,6 +3,8 @@
 import unittest
 from models.rectangle import Rectangle
 from models.base import Base
+from io import StringIO
+from unittest.mock import patch
 
 
 class TestRectangleMethdods(unittest.TestCase):
@@ -136,3 +138,53 @@ class TestRectangleMethdods(unittest.TestCase):
         rtg2 = Rectangle(5, 4)
         self.assertEqual(rtg.area(), 10)
         self.assertEqual(rtg2.area(), 20)
+
+    def test_display(self):
+        """Test the printed string"""
+        rtg = Rectangle(2, 3)
+        res = "##\n" + "##\n" + "##\n"
+        with patch('sys.stdout', new=StringIO()) as std_out:
+            rtg.display()
+            self.assertEqual(std_out.getvalue(), res)
+
+    def test_display_wh(self):
+        """Test the printed string and modify width and height"""
+        rtg = Rectangle(1, 2)
+        res = "#\n" + "#\n"
+        with patch('sys.stdout', new=StringIO()) as std_out:
+            rtg.display()
+            self.assertEqual(std_out.getvalue(), res)
+
+        rtg.width = 2
+        res = "##\n" + "##\n"
+        with patch('sys.stdout', new=StringIO()) as std_out:
+            rtg.display()
+            self.assertEqual(std_out.getvalue(), res)
+
+    def test_display_xy(self):
+        """Test display with x and y # to default"""
+        rtg = Rectangle(1, 2, 1, 1)
+        res = "\n #\n #\n"
+        with patch('sys.stdout', new=StringIO()) as std_out:
+            rtg.display()
+            self.assertEqual(std_out.getvalue(), res)
+
+    def test_display_xy1(self):
+        """ Test display with x and y modified"""
+        rtg = Rectangle(2, 3)
+        res = "##\n##\n##\n"
+        with patch('sys.stdout', new=StringIO()) as std_out:
+            rtg.display()
+            self.assertEqual(std_out.getvalue(), res)
+
+        rtg.x = 2
+        res = "  ##\n  ##\n  ##\n"
+        with patch('sys.stdout', new=StringIO()) as std_out:
+            rtg.display()
+            self.assertEqual(std_out.getvalue(), res)
+
+        rtg.y = 1
+        res = "\n  ##\n  ##\n  ##\n"
+        with patch('sys.stdout', new=StringIO()) as std_out:
+            rtg.display()
+            self.assertEqual(std_out.getvalue(), res)
