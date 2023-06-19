@@ -82,3 +82,9 @@ class Rectangle(Base):
             rect += "#" * self.width + "\n"
 
         print(rect[:-1])
+
+    def __str__(self):
+        """Retrun a string representation fo a rectangle"""
+        rect = "[Rectangle] ({}) {}/{} - ".format(self.id, self.x, self.y)
+        str_wh = "{}/{}".format(self.width, self.height)
+        return (rect + str_wh)

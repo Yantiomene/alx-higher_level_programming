@@ -188,3 +188,53 @@ class TestRectangleMethdods(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as std_out:
             rtg.display()
             self.assertEqual(std_out.getvalue(), res)
+
+    def test_str(self):
+        """Test the return value of a __str__"""
+        rtg = Rectangle(2, 3)
+        res = "[Rectangle] (1) 0/0 - 2/3"
+        self.assertEqual(rtg.__str__(), res)
+
+    def test_str_1(self):
+        """Test the printed value of rectangle"""
+        rtg = Rectangle(1, 2, 3, 4, 5)
+        res = "[Rectangle] (5) 3/4 - 1/2\n"
+        with patch('sys.stdout', new=StringIO()) as std_out:
+            print(rtg)
+            self.assertEqual(std_out.getvalue(), res)
+
+    def test_str_2(self):
+        """Test the printed value of rectangle without id"""
+        rtg = Rectangle(1, 2, 3, 4)
+        res = "[Rectangle] (1) 3/4 - 1/2\n"
+        with patch('sys.stdout', new=StringIO()) as std_out:
+            print(rtg)
+            self.assertEqual(std_out.getvalue(), res)
+
+        rtg.width = 3
+        rtg.height = 5
+        rtg.id = 10
+        res = "[Rectangle] (10) 3/4 - 3/5\n"
+        with patch('sys.stdout', new=StringIO()) as std_out:
+            print(rtg)
+            self.assertEqual(std_out.getvalue(), res)
+
+    def test_str_3(self):
+        """Test the printed value of rectangle"""
+        rtg = Rectangle(1, 2)
+        res = "[Rectangle] (1) 0/0 - 1/2\n"
+        with patch('sys.stdout', new=StringIO()) as std_out:
+            print(rtg)
+            self.assertEqual(std_out.getvalue(), res)
+
+        rtg2 = Rectangle(1, 2, 3, 4)
+        res = "[Rectangle] (2) 3/4 - 1/2\n"
+        with patch('sys.stdout', new=StringIO()) as std_out:
+            print(rtg2)
+            self.assertEqual(std_out.getvalue(), res)
+
+        rtg3 = Rectangle(5, 12, 4, 7)
+        res = "[Rectangle] (3) 4/7 - 5/12\n"
+        with patch('sys.stdout', new=StringIO()) as std_out:
+            print(rtg3)
+            self.assertEqual(std_out.getvalue(), res)
