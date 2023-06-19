@@ -3,6 +3,7 @@
 import unittest
 from models.base import Base
 from models.rectangle import Rectangle
+from models.square import Square
 from unittest.mock import patch
 from io import StringIO
 
@@ -61,3 +62,34 @@ class TestBaseMethods(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as std_out:
             print(json_dictionary)
             self.assertEqual(std_out.getvalue(), res.replace("'", "\""))
+
+    def test_save_to_file(self):
+        """ Test save to file """
+        Square.save_to_file(None)
+        res = "[]"
+        with open("Square.json", "r") as file:
+            self.assertEqual(file.read(), res)
+
+        try:
+            os.remove("Square.json")
+        except Exception:
+            pass
+
+        Square.save_to_file([])
+        with open("Square.json", "r") as file:
+            self.assertEqual(file.read(), "[]")
+
+    def test_save_to_file_2(self):
+        """ Test save to file """
+        Rectangle.save_to_file(None)
+        res = "[]"
+        with open("Rectangle.json", "r") as file:
+            self.assertEqual(file.read(), res)
+        try:
+            os.remove("Rectangle.json")
+        except Exception:
+            pass
+
+        Rectangle.save_to_file([])
+        with open("Rectangle.json", "r") as file:
+            self.assertEqual(file.read(), "[]")
