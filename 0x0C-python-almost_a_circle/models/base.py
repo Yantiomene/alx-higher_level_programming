@@ -2,6 +2,7 @@
 """Package that contains the parent class of all
 the sub classes that will be created later
 """
+import json
 
 
 class Base:
@@ -16,3 +17,10 @@ class Base:
         else:
             Base.__nb_objects += 1
             self.id = Base.__nb_objects
+
+    @staticmethod
+    def to_json_string(list_dictionaries):
+        """ return the JSON string representation"""
+        if list_dictionaries is None or list_dictionaries == "[]":
+            return "[]"
+        return json.dumps(list_dictionaries)

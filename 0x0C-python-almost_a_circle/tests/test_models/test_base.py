@@ -2,6 +2,9 @@
 """Package for test cases"""
 import unittest
 from models.base import Base
+from models.rectangle import Rectangle
+from unittest.mock import patch
+from io import StringIO
 
 
 class TestBaseMethods(unittest.TestCase):
@@ -47,3 +50,14 @@ class TestBaseMethods(unittest.TestCase):
         new = Base()
         with self.assertRaises(AttributeError):
             new.__nb_objects
+
+    def test_to_json_string(self):
+        """ Test Dictionary to JSON string """
+        r = Rectangle(2, 2)
+        dictionary = r.to_dictionary()
+        json_dictionary = Base.to_json_string([dictionary])
+        res = "[{}]\n".format(dictionary.__str__())
+
+        with patch('sys.stdout', new=StringIO()) as std_out:
+            print(json_dictionary)
+            self.assertEqual(std_out.getvalue(), res.replace("'", "\""))
