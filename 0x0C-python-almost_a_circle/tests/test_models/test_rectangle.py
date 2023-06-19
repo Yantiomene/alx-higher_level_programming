@@ -115,3 +115,24 @@ class TestRectangleMethdods(unittest.TestCase):
         """Test init method with negative y"""
         with self.assertRaises(ValueError):
             rtg = Rectangle(1, 1, 1, -1)
+
+    def test_area(self):
+        """Test the value of the area of a rectangle"""
+        rgt = Rectangle(4, 10)
+        self.assertEqual(rgt.area(), 40)
+
+    def test_area_wh(self):
+        """Test the area of a rectangle with modified attrs"""
+        rtg = Rectangle(4, 5)
+        self.assertEqual(rtg.area(), 20)
+        rtg.width = 2
+        self.assertEqual(rtg.area(), 10)
+        rtg.height = 10
+        self.assertEqual(rtg.area(), 20)
+
+    def test_area_2_rect(self):
+        """Test the area of 2 rectangles"""
+        rtg = Rectangle(2, 5)
+        rtg2 = Rectangle(5, 4)
+        self.assertEqual(rtg.area(), 10)
+        self.assertEqual(rtg2.area(), 20)
