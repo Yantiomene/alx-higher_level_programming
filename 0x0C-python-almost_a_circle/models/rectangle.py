@@ -91,10 +91,19 @@ class Rectangle(Base):
 
     def update(self, *args, **kwargs):
         """Assigns an argument to each attribute"""
-        if args is not None and len(args) is not 0:
+        if args is not None and len(args) != 0:
             list_attr = ['id', 'width', 'height', 'x', 'y']
             for i in range(len(args)):
                 setattr(self, list_attr[i], args[i])
         else:
             for key, value in kwargs.items():
                 setattr(self, key, value)
+
+    def to_dictionary(self):
+        """returns a dic with attributes"""
+        list_attr = ['id', 'width', 'height', 'x', 'y']
+        dic = {}
+        for key in list_attr:
+            dic[key] = getattr(self, key)
+
+        return dic

@@ -238,3 +238,51 @@ class TestRectangleMethdods(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as std_out:
             print(rtg3)
             self.assertEqual(std_out.getvalue(), res)
+
+    def test_to_dictionary(self):
+        """ Test dictionary returned """
+        r = Rectangle(1, 2, 3, 4, 1)
+        res = "[Rectangle] (1) 3/4 - 1/2\n"
+        with patch('sys.stdout', new=StringIO()) as std_out:
+            print(r)
+            self.assertEqual(std_out.getvalue(), res)
+
+        self.assertEqual(r.width, 1)
+        self.assertEqual(r.height, 2)
+        self.assertEqual(r.x, 3)
+        self.assertEqual(r.y, 4)
+        self.assertEqual(r.id, 1)
+
+        res = "<class 'dict'>\n"
+
+        with patch('sys.stdout', new=StringIO()) as std_out:
+            print(type(r.to_dictionary()))
+            self.assertEqual(std_out.getvalue(), res)
+
+    def test_to_dictionary_2(self):
+        """ Test dictionary returned """
+        r1 = Rectangle(2, 2, 2, 2)
+        res = "[Rectangle] (1) 2/2 - 2/2\n"
+        with patch('sys.stdout', new=StringIO()) as std_out:
+            print(r1)
+            self.assertEqual(std_out.getvalue(), res)
+
+        r2 = Rectangle(5, 7)
+        res = "[Rectangle] (2) 0/0 - 5/7\n"
+        with patch('sys.stdout', new=StringIO()) as std_out:
+            print(r2)
+            self.assertEqual(std_out.getvalue(), res)
+
+        r1_dictionary = r1.to_dictionary()
+        r2.update(**r1_dictionary)
+
+        self.assertEqual(r1.width, r2.width)
+        self.assertEqual(r1.height, r2.height)
+        self.assertEqual(r1.x, r2.x)
+        self.assertEqual(r1.y, r2.y)
+        self.assertEqual(r1.id, r2.id)
+
+        res = "<class 'dict'>\n"
+        with patch('sys.stdout', new=StringIO()) as std_out:
+            print(type(r1_dictionary))
+            self.assertEqual(std_out.getvalue(), res)
