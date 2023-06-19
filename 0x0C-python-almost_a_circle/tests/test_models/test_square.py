@@ -116,6 +116,11 @@ class TestSquareMethods(unittest.TestCase):
         with self.assertRaises(ValueError):
             s = Square(1, 1, -1)
 
+    def test_size_neg(self):
+        """Test case os negative size"""
+        with self.assertRaises(ValueError):
+            s = Square(-1)
+
     def test_area(self):
         """Test the return value of the area method"""
         s = Square(2)
@@ -218,3 +223,70 @@ class TestSquareMethods(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as std_out:
             print(s3)
             self.assertEqual(std_out.getvalue(), res)
+
+    def test_update(self):
+        """Test update method"""
+        s = Square(2)
+        res = "[Square] (1) 0/0 - 2\n"
+        with patch('sys.stdout', new=StringIO()) as std_out:
+            print(s)
+            self.assertEqual(std_out.getvalue(), res)
+
+        s.update(5)
+        res = "[Square] (5) 0/0 - 2\n"
+        with patch('sys.stdout', new=StringIO()) as std_out:
+            print(s)
+            self.assertEqual(std_out.getvalue(), res)
+
+    def test_update_2(self):
+        """Test update method"""
+        s = Square(2)
+        res = "[Square] (1) 0/0 - 2\n"
+        with patch('sys.stdout', new=StringIO()) as std_out:
+            print(s)
+            self.assertEqual(std_out.getvalue(), res)
+
+        s.update(4, 2, 2, 2)
+        res = "[Square] (4) 2/2 - 2\n"
+        with patch('sys.stdout', new=StringIO()) as std_out:
+            print(s)
+            self.assertEqual(std_out.getvalue(), res)
+
+        s.update(y=3)
+        res = "[Square] (4) 2/3 - 2\n"
+        with patch('sys.stdout', new=StringIO()) as std_out:
+            print(s)
+            self.assertEqual(std_out.getvalue(), res)
+
+        s.update(id=10, size=5)
+        res = "[Square] (10) 2/3 - 5\n"
+        with patch('sys.stdout', new=StringIO()) as std_out:
+            print(s)
+            self.assertEqual(std_out.getvalue(), res)
+
+    def test_udpate_3(self):
+        """Test update method"""
+        s = Square(5)
+        res = "[Square] (1) 0/0 - 5\n"
+        with patch('sys.stdout', new=StringIO()) as std_out:
+            print(s)
+            self.assertEqual(std_out.getvalue(), res)
+
+        dic = {'size': 4, 'y': 2}
+        s.update(**dic)
+        res = "[Square] (1) 0/2 - 4\n"
+        with patch('sys.stdout', new=StringIO()) as std_out:
+            print(s)
+            self.assertEqual(std_out.getvalue(), res)
+
+    def test_update_4(self):
+        """Test udpate method"""
+        s = Square(5)
+        res = "[Square] (1) 0/0 - 5\n"
+        with patch('sys.stdout', new=StringIO()) as std_out:
+            print(s)
+            self.assertEqual(std_out.getvalue(), res)
+
+        dic = {'id': 10, 'x': '5', 'y': 2}
+        with self.assertRaises(TypeError):
+            s.update(**dic)
