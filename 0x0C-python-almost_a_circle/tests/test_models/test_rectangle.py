@@ -302,6 +302,13 @@ class TestRectangleMethdods(unittest.TestCase):
         load_file = Rectangle.load_from_file()
         self.assertEqual(load_file, [])
 
+    def test_save_to_file(self):
+        """Test save to file"""
+        Rectangle.save_to_file([Rectangle(1, 2)])
+        res = '[{"id": 1, "width": 1, "height": 2, "x": 0, "y": 0}]'
+        with open("Rectangle.json", "r") as f:
+            self.assertEqual(f.read(), res)
+
     def test_load_from_file_2(self):
         """ Test load JSON file """
         r1 = Rectangle(5, 5)

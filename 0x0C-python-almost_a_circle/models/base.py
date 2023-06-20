@@ -4,6 +4,7 @@ the sub classes that will be created later
 """
 import json
 import os
+import csv
 
 
 class Base:
@@ -78,3 +79,55 @@ class Base:
             list_obj.append(cls.create(**list_cls[index]))
 
         return list_obj
+
+    @classmethod
+    def save_to_file_csv(cls, list_objs):
+        """Serialises in CSV file"""
+        filename = "{}.csv".format(cls.__name__)
+        if cls.__name__ == "Rectangle":
+            list_dic = [0, 0, 0, 0, 0]
+            list_keys = ['id', 'width', 'height', 'x', 'y']
+        else:
+            list_dic = [0, 0, 0, 0]
+            list_keys = ['id', 'size', 'x', 'y']
+
+        mat = []
+        if list_objs:
+            for obj in list_objs:
+                for i in range(len(list_keys)):
+                    list_dic[i] = obj.to_dictionary()[list_keys[i]]
+                mat.append(list_dic[:])
+
+        with open(filename, 'w') as f:
+            writer = csv.writer(f)
+            writer.writerows(mat)
+
+    @classmethod
+    def load_from_file_csv(cls):
+        """Deserialises the CSV file"""
+        filename = "{}.csv".format(cls.__name__)
+
+        if os.path.exists(filename) is False:
+            return []
+
+        with open(filename, 'r') as f:
+            reader = csv.reader(f)
+            list_rows = list(reader)
+
+        if cls.__name__ == "Rectangle":
+            list_keys = ['id', 'width', 'height', 'x', 'y']
+        else:
+            list_keys = ['id', 'size', 'x', 'y']
+
+        mat = []
+        for row in list_rows:
+            dic_row = {}
+            for elt in enumerate(row):
+                dic_row[list_keys[elt[0]]] = int(elt[1])
+            mat.append(dic_row)
+
+        list_objs = []
+        for i in range(len(mat)):
+            list_objs.append(cls.create(**mat[i]))
+
+        return list_objs
