@@ -21,4 +21,4 @@ if __name__ == "__main__":
     stat_city = session.query(State, City).order_by(State.id).\
         filter(State.id == City.state_id).all()
     for state, city in stat_city:
-        print("{} : ({}) {}".format(state.name, city.id, city.name))
+        print("{}: ({}) {}".format(state.name, city.id, city.name))
